@@ -13,6 +13,30 @@ mesh IP into something human-friendly.
 
 ---
 
+## Don’t want to host this yourself?
+
+If you don’t want to run your own copy, you can use the **WVMN Geocoder** endpoint:
+
+- `http://wvmn-tileserver.local.mesh/geocoder.json`
+- `http://wvmn-tileserver.local.mesh/geocoder.json?ip=10.190.71.239`
+
+### Nginx: serve it as `/geocoder.json`
+
+To expose the PHP endpoint at a nice `.json` URL, add this to your Nginx site config:
+
+```nginx
+location = /geocoder.json {
+    rewrite ^ /geocoder/index.php last;
+}
+```
+
+(Adjust `/geocoder/index.php` to match where you deployed the script.)
+
+---
+
+
+---
+
 ## Features
 
 - **Client-level cache** (1 day)
@@ -262,3 +286,7 @@ header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
 - Keep `cache/` writable by the PHP user (web server).
 
 ---
+
+## License
+
+See LICENSE file
